@@ -18,15 +18,15 @@ $ pip install -r requirements.txt
 
 For authorization you need to create a new personal GitHub token. You can do this from the GitHub settings, under the **Personal Access Tokens** tab.
 
-![Step 1](/images/new-token-1.png)
+![Step 1](images/new-token-1.png)
 
 When you click the **Generate new token** button you enter the token creation screen. Here you should give the token a descriptive name and choose its *scopes*, which basically determine what the token is allowed to do.
 
-![Step 2](/images/new-token-2.png)
+![Step 2](images/new-token-2.png)
 
 To backup public and private repositories you need to select only the **repo** scope. If you have no need for private repositories just choose the **public_repo** scope.
 
-![Step 3](/images/new-token-3.png)
+![Step 3](images/new-token-3.png)
 
 After clicking the **Generate token** button you're presented with the generated token. Remember to store it now, as GitHub won't show it to you anymore!
 
