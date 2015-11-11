@@ -1,6 +1,6 @@
 # GitHub backup script
 
-This directory contains a script, ```backup.py``` for backing up GitHub repositories.
+This directory contains a script, ```backup.py```, for backing up GitHub repositories.
 
 The script requires a GitHub token and a destination directory. It then uses the token to populate the destination directory with clones of all the repositories the token can access.
 
