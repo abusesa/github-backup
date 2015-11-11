@@ -10,6 +10,14 @@ import requests
 import subprocess
 
 
+def get_json(url, token):
+    response = requests.get(url, headers={
+        "Authorization": "token {0}".format(token)
+    })
+    response.raise_for_status()
+    return response.json()
+
+
 def check_name(name):
     if not re.match(r"^\w[-\.\w]*$", name):
         raise RuntimeError("invalid name '{0}'".format(name))
@@ -26,10 +34,14 @@ def mkdir(path):
     return True
 
 
-def mirror(repo_name, repo_url, to_path, token):
+def mirror(repo_name, repo_url, to_path, username, token):
     parsed = urlparse.urlparse(repo_url)
     modified = list(parsed)
-    modified[1] = token + "@" + parsed.netloc
+    modified[1] = "{username}:{token}@{netloc}".format(
+        username=username,
+        token=token,
+        netloc=parsed.netloc
+    )
     repo_url = urlparse.urlunparse(modified)
 
     repo_path = os.path.join(to_path, repo_name)
@@ -57,19 +69,15 @@ def main():
     if mkdir(path):
         print("Created directory {0}".format(path))
 
-    response = requests.get("https://api.github.com/user/repos", headers={
-        "Authorization": "token {0}".format(token)
-    })
-    response.raise_for_status()
-
-    for repo in response.json():
+    user = get_json("https://api.github.com/user", token)
+    for repo in get_json("https://api.github.com/user/repos", token):
         name = check_name(repo["name"])
         owner = check_name(repo["owner"]["login"])
         clone_url = repo["clone_url"]
 
         owner_path = os.path.join(path, owner)
         mkdir(owner_path)
-        mirror(name, clone_url, owner_path, token)
+        mirror(name, clone_url, owner_path, user["login"], token)
 
 
 if __name__ == "__main__":
