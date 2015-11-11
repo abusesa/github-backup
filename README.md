@@ -4,6 +4,8 @@ This directory contains a script, ```backup.py``` for backing up GitHub reposito
 
 The script requires a GitHub token and a destination directory. It then uses the token to populate the destination directory with clones of all the repositories the token can access.
 
+Repeated runs only update the already existing backups and add new repositories, if any.
+
 ## Installation
 
 Install the required Python dependencies using ```pip```:
