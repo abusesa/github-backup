@@ -2,6 +2,7 @@ from __future__ import print_function
 
 import os
 import re
+import sys
 import json
 import errno
 import argparse
@@ -49,7 +50,7 @@ def mirror(repo_name, repo_url, to_path, username, token):
 
     # git-init manual:
     # "Running git init in an existing repository is safe."
-    subprocess.call(["git", "init", "--bare"], cwd=repo_path)
+    subprocess.call(["git", "init", "--bare", "--quiet"], cwd=repo_path)
 
     # https://github.com/blog/1270-easier-builds-and-deployments-using-git-over-https-and-oauth:
     # "To avoid writing tokens to disk, don't clone."
@@ -67,7 +68,7 @@ def main():
     token = config["token"]
     path = os.path.expanduser(config["directory"])
     if mkdir(path):
-        print("Created directory {0}".format(path))
+        print("Created directory {0}".format(path), file=sys.stderr)
 
     user = get_json("https://api.github.com/user", token)
     for repo in get_json("https://api.github.com/user/repos", token):
