@@ -54,7 +54,9 @@ def mirror(repo_name, repo_url, to_path, username, token):
 
     # https://github.com/blog/1270-easier-builds-and-deployments-using-git-over-https-and-oauth:
     # "To avoid writing tokens to disk, don't clone."
-    subprocess.call(["git", "fetch", "--tags", repo_url, "refs/heads/*:refs/heads/*"], cwd=repo_path)
+    subprocess.call(["git", "fetch", "--force", "--prune", "--tags",
+                     repo_url, "refs/heads/*:refs/heads/*"],
+                    cwd=repo_path)
 
 
 def main():
