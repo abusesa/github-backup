@@ -12,11 +12,16 @@ import subprocess
 
 
 def get_json(url, token):
-    response = requests.get(url, headers={
-        "Authorization": "token {0}".format(token)
-    })
-    response.raise_for_status()
-    return response.json()
+    while True:
+        response = requests.get(url, headers={
+            "Authorization": "token {0}".format(token)
+        })
+        response.raise_for_status()
+        yield response.json()
+
+        if "next" not in response.links:
+            break
+        url = response.links["next"]["url"]
 
 
 def check_name(name):
@@ -72,15 +77,16 @@ def main():
     if mkdir(path):
         print("Created directory {0}".format(path), file=sys.stderr)
 
-    user = get_json("https://api.github.com/user", token)
-    for repo in get_json("https://api.github.com/user/repos", token):
-        name = check_name(repo["name"])
-        owner = check_name(repo["owner"]["login"])
-        clone_url = repo["clone_url"]
+    user = next(get_json("https://api.github.com/user", token))
+    for page in get_json("https://api.github.com/user/repos", token):
+        for repo in page:
+            name = check_name(repo["name"])
+            owner = check_name(repo["owner"]["login"])
+            clone_url = repo["clone_url"]
 
-        owner_path = os.path.join(path, owner)
-        mkdir(owner_path)
-        mirror(name, clone_url, owner_path, user["login"], token)
+            owner_path = os.path.join(path, owner)
+            mkdir(owner_path)
+            mirror(name, clone_url, owner_path, user["login"], token)
 
 
 if __name__ == "__main__":
