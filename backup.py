@@ -1,21 +1,20 @@
-from __future__ import print_function
-
 import os
 import re
 import sys
 import json
 import errno
 import argparse
-import urlparse
-import requests
 import subprocess
+import urllib.parse
+
+import requests
 
 
 def get_json(url, token):
     while True:
-        response = requests.get(url, headers={
-            "Authorization": "token {0}".format(token)
-        })
+        response = requests.get(
+            url, headers={"Authorization": "token {0}".format(token)}
+        )
         response.raise_for_status()
         yield response.json()
 
@@ -32,7 +31,7 @@ def check_name(name):
 
 def mkdir(path):
     try:
-        os.makedirs(path, 0770)
+        os.makedirs(path, 0o770)
     except OSError as ose:
         if ose.errno != errno.EEXIST:
             raise
@@ -41,14 +40,12 @@ def mkdir(path):
 
 
 def mirror(repo_name, repo_url, to_path, username, token):
-    parsed = urlparse.urlparse(repo_url)
+    parsed = urllib.parse.urlparse(repo_url)
     modified = list(parsed)
     modified[1] = "{username}:{token}@{netloc}".format(
-        username=username,
-        token=token,
-        netloc=parsed.netloc
+        username=username, token=token, netloc=parsed.netloc
     )
-    repo_url = urlparse.urlunparse(modified)
+    repo_url = urllib.parse.urlunparse(modified)
 
     repo_path = os.path.join(to_path, repo_name)
     mkdir(repo_path)
@@ -59,9 +56,18 @@ def mirror(repo_name, repo_url, to_path, username, token):
 
     # https://github.com/blog/1270-easier-builds-and-deployments-using-git-over-https-and-oauth:
     # "To avoid writing tokens to disk, don't clone."
-    subprocess.call(["git", "fetch", "--force", "--prune", "--tags",
-                     repo_url, "refs/heads/*:refs/heads/*"],
-                    cwd=repo_path)
+    subprocess.call(
+        [
+            "git",
+            "fetch",
+            "--force",
+            "--prune",
+            "--tags",
+            repo_url,
+            "refs/heads/*:refs/heads/*",
+        ],
+        cwd=repo_path,
+    )
 
 
 def main():

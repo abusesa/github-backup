@@ -8,10 +8,10 @@ Repeated runs only update the already existing backups and add new repositories,
 
 ## Installation
 
-Install the required Python dependencies using ```pip```:
+Install the required Python dependencies using ```pip3```:
 
 ```
-$ pip install -r requirements.txt
+$ pip3 install -r requirements.txt
 ```
 
 ## Configuring
@@ -52,5 +52,5 @@ As an example let's create a file, ```config.json```. This file should contain t
 After preparing the token and the configuration file you now can run the script:
 
 ```
-$ python backup.py config.json
+$ python3 backup.py config.json
 ```
