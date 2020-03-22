@@ -47,6 +47,18 @@ As an example let's create a file, ```config.json```. This file should contain t
 }
 ```
 
+#### Choose users and organizations to back up
+
+By default, all repositories you have read access to are backed up. To choose which users' and organizations' repos are backed up, add `owners` to `config.json`:
+
+```
+{
+    "token": "6b86190dd45c57c1a1b039a5a54d892e019102f7",
+    "directory": "~/backups/github.com",
+    "owners": ["username", "anotherusername"]
+}
+```
+
 ## Running
 
 After preparing the token and the configuration file you now can run the script:

@@ -78,6 +78,7 @@ def main():
     with open(args.config, "rb") as f:
         config = json.loads(f.read())
 
+    owners = config.get("owners")
     token = config["token"]
     path = os.path.expanduser(config["directory"])
     if mkdir(path):
@@ -89,6 +90,9 @@ def main():
             name = check_name(repo["name"])
             owner = check_name(repo["owner"]["login"])
             clone_url = repo["clone_url"]
+
+            if owners and owner not in owners:
+                continue
 
             owner_path = os.path.join(path, owner)
             mkdir(owner_path)
