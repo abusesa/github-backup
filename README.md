@@ -1,6 +1,6 @@
 # GitHub backup script
 
-This directory contains a script, ```backup.py```, for backing up GitHub repositories.
+This directory contains a script, `backup.py`, for backing up GitHub repositories.
 
 The script requires a GitHub token and a destination directory. It then uses the token to populate the destination directory with clones of all the repositories the token can access.
 
@@ -8,7 +8,7 @@ Repeated runs only update the already existing backups and add new repositories,
 
 ## Installation
 
-Install the required Python dependencies using ```pip3```:
+Install the required Python dependencies using `pip3`:
 
 ```
 $ pip3 install -r requirements.txt
@@ -32,13 +32,13 @@ To backup public and private repositories you need to select only the **repo** s
 
 After clicking the **Generate token** button you're presented with the generated token. Remember to store it now, as GitHub won't show it to you anymore!
 
-In the next example let's assume your token is ```6b86190dd45c57c1a1b039a5a54d892e019102f7``` as in the above image.
+In the next example let's assume your token is `6b86190dd45c57c1a1b039a5a54d892e019102f7` as in the above image.
 
 ### Create a configuration file
 
-To run the script you need a JSON configuration file. For an example see the included file ```config.json.example```.
+To run the script you need a JSON configuration file. For an example see the included file `config.json.example`.
 
-As an example let's create a file, ```config.json```. This file should contain the token we just created and the destination directory where we want to back up the repositories:
+As an example let's create a file, `config.json`. This file should contain the token we just created and the destination directory where we want to back up the repositories:
 
 ```
 {
