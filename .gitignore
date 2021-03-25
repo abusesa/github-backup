@@ -26,6 +26,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-# Test folder
+# Test data
 config
 backups
+start.sh
