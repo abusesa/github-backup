@@ -1,5 +1,11 @@
 #!/bin/sh
 
+echo "Project: github-backup"
+echo "Author:  lnxd"
+echo "Base:    Alpine 3.9"
+echo "Target:  Unraid"
+echo ""
+
 # If config doesn't exist yet, create it
 if [ ! -f /home/docker/github-backup/config/config.json ]; then
     cp /home/docker/github-backup/config.json.example /home/docker/github-backup/config/config.json
