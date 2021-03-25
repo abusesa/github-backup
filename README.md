@@ -14,7 +14,7 @@ Installation can be completed via CA on Unraid.
 
 ### Create a token
 
-For authorization you need to create a new personal GitHub token. You can do this from [this](https //github.com token) page.
+For authorization you need to create a new personal GitHub token. You can do this from [this](https://github.com/settings/tokens) page.
 
 ![Step 1](https://raw.githubusercontent.com/lnxd/docker-github-backup/master/images/new-token-1.png)
 
