@@ -15,7 +15,7 @@ WORKDIR /home/docker/github-backup
 RUN apk add --no-cache python3 py3-pip git; \
     pip3 install --upgrade pip; \
     pip3 install -r requirements.txt; \
-    sudo chmod +x backup.sh;
+    chmod +x backup.sh;
 
 USER nobody
 # Define default command.
