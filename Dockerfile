@@ -19,6 +19,6 @@ RUN apk add --no-cache python3 py3-pip git; \
     chown -R nobody /home/docker; \
     chmod +x backup.sh;
 
-USER nobody
+USER nobody 99:98
 # Define default command.
 CMD ["./backup.sh"]
