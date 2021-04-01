@@ -5,7 +5,7 @@ RUN mkdir -p /home/docker/github-backup/config;
 ENV HOME /home/docker
 
 # Copy files from git
-COPY backup.py /home/docker/github-backup/backup.py
+COPY github-backup.py /home/docker/github-backup/github-backup.py
 COPY requirements.txt /home/docker/github-backup/requirements.txt
 COPY config.json.example /home/docker/github-backup/config.json.example
 COPY backup.sh /home/docker/github-backup/backup.sh
