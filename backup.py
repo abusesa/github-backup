@@ -96,7 +96,6 @@ def main():
                 continue
 
             if name in excluded_repos_list:
-                print("excluded repo :", name)
                 continue
 
             owner_path = os.path.join(path, owner)
