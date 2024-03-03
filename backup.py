@@ -78,6 +78,7 @@ def main():
     with open(args.config, "rb") as f:
         config = json.loads(f.read())
 
+    excluded_repos_list = config.get("exclude-repo")
     owners = config.get("owners")
     token = config["token"]
     path = os.path.expanduser(config["directory"])
@@ -94,6 +95,9 @@ def main():
             if owners and owner not in owners:
                 continue
 
+            if name in excluded_repos_list:
+                continue
+
             owner_path = os.path.join(path, owner)
             mkdir(owner_path)
             mirror(name, clone_url, owner_path, user["login"], token)
@@ -101,3 +105,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    

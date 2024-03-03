@@ -47,6 +47,20 @@ As an example let's create a file, `config.json`. This file should contain the t
 }
 ```
 
+#### Choose some repositories to exclude from the backup.
+
+By default, all repositories you have read access to are backed up. To exclude some repos, add `exclude-repos` to `config.json`:
+
+```
+{
+    "token": "6b86190dd45c57c1a1b039a5a54d892e019102f7",
+    "directory": "~/backups/github.com",
+    "exclude-repo": ["dont-need-this-repo", "forked-repo-to-skip", "the-giant-repo-to-skip"]
+}
+```
+Keep in mind that if a repo has already been backed up it will not be deleted. But it will no longer continue to be updated with subsequient backups. You could manually delete the excldued repository and it would not come back when you run the backup script again, as the repository was excluded.
+
+
 #### Choose users and organizations to back up
 
 By default, all repositories you have read access to are backed up. To choose which users' and organizations' repos are backed up, add `owners` to `config.json`:
